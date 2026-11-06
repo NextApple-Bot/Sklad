@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Склад">
+<meta name="application-name" content="Склад">
+<meta name="theme-color" content="#007AFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Менеджер складского списка товаров">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Icons -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzAwN0FGRiIvPjxwYXRoIGQ9Ik04IDEzbDgtNC41IDggNC41djguNWwtOCA0LjUtOC00LjV6IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE2IDguNXYxNyIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxwYXRoIGQ9Ik04IDEzaDE2IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMS44Ii8+PC9zdmc+">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCI+CiAgPHJlY3Qgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxODAiIHJ4PSI0MCIgZmlsbD0iIzAwN0FGRiIvPgogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgPHBhdGggZD0iTTQ1IDc1IEw5MCA1MCBMMTM1IDc1IEwxMzUgMTIwIEw5MCAxNDUgTDQ1IDEyMCBaIi8+CiAgICA8cGF0aCBkPSJNOTAgNTAgTDkwIDE0NSIvPgogICAgPHBhdGggZD0iTTQ1IDc1IEwxMzUgNzUiLz4KICAgIDxwYXRoIGQ9Ik02NyA2MiBMMTEzIDg4Ii8+CiAgPC9nPgogIDxjaXJjbGUgY3g9IjkwIiBjeT0iMTAwIiByPSI2IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPg==">
+
+<!-- Inline Web App Manifest -->
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogItCh0LrQu9Cw0LQg4oCUINCc0LXQvdC10LTQttC10YAiLCAic2hvcnRfbmFtZSI6ICLQodC60LvQsNC0IiwgInN0YXJ0X3VybCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLCAidGhlbWVfY29sb3IiOiAiIzAwN0FGRiIsICJkZXNjcmlwdGlvbiI6ICLQnNC10L3QtdC00LbQtdGAINGB0LrQu9Cw0LTRgdC60L7Qs9C+INGB0L/QuNGB0LrQsCDRgtC+0LLQsNGA0L7QsiIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE9EQWdNVGd3SWlCM2FXUjBhRDBpTVRnd0lpQm9aV2xuYUhROUlqRTRNQ0krQ2lBZ1BISmxZM1FnZDJsa2RHZzlJakU0TUNJZ2FHVnBaMmgwUFNJeE9EQWlJSEo0UFNJME1DSWdabWxzYkQwaUl6QXdOMEZHUmlJdlBnb2dJRHhuSUdacGJHdzlJbTV2Ym1VaUlITjBjbTlyWlQwaUkyWm1aaUlnYzNSeWIydGxMWGRwWkhSb1BTSTRJaUJ6ZEhKdmEyVXRiR2x1WldOaGNEMGljbTkxYm1RaUlITjBjbTlyWlMxc2FXNWxhbTlwYmowaWNtOTFibVFpUGdvZ0lDQWdQSEJoZEdnZ1pEMGlUVFExSURjMUlFdzVNQ0ExTUNCTU1UTTFJRGMxSUV3eE16VWdNVEl3SUV3NU1DQXhORFVnVERRMUlERXlNQ0JhSWk4K0NpQWdJQ0E4Y0dGMGFDQmtQU0pOT1RBZ05UQWdURGt3SURFME5TSXZQZ29nSUNBZ1BIQmhkR2dnWkQwaVRUUTFJRGMxSUV3eE16VWdOelVpTHo0S0lDQWdJRHh3WVhSb0lHUTlJazAyTnlBMk1pQk1NVEV6SURnNElpOCtDaUFnUEM5blBnb2dJRHhqYVhKamJHVWdZM2c5SWprd0lpQmplVDBpTVRBd0lpQnlQU0kySWlCbWFXeHNQU0lqWm1abUlpOCtDand2YzNablBnPT0iLCAic2l6ZXMiOiAiMTgweDE4MCIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLCAicHVycG9zZSI6ICJhbnkgbWFza2FibGUifV19">
+
+<title>Склад</title>
+<style>
+:root {
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --text: #1c1c1e;
+  --text2: #8e8e93;
+  --border: #c6c6c8;
+  --accent: #007aff;
+  --danger: #ff3b30;
+  --success: #34c759;
+  --overlay: rgba(0,0,0,0.4);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --card: #1c1c1e;
+    --text: #f5f5f7;
+    --text2: #8e8e93;
+    --border: #38383a;
+    --accent: #0a84ff;
+    --danger: #ff453a;
+    --success: #30d158;
+    --overlay: rgba(0,0,0,0.6);
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  height: 100dvh;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  flex-shrink: 0;
+  background: var(--card);
+  border-bottom: 0.5px solid var(--border);
+  padding: calc(12px + var(--safe-top)) 16px 12px;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn:active { opacity: 0.7; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-secondary { background: var(--bg); color: var(--accent); }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-ghost { background: transparent; color: var(--accent); padding: 8px 10px; }
+.btn-sm { padding: 6px 12px; font-size: 14px; border-radius: 8px; }
+
+.search-wrap {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 36px 10px 36px;
+  font-size: 16px;
+  color: var(--text);
+  outline: none;
+}
+
+.search-input::placeholder { color: var(--text2); }
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text2);
+  pointer-events: none;
+  font-size: 15px;
+}
+
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--text2);
+  color: var(--card);
+  border: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  display: none;
+}
+
+.search-clear.visible { display: block; }
+
+/* Stats bar */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--text2);
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.stats strong { color: var(--text); font-weight: 600; }
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 16px;
+  padding-bottom: calc(100px + var(--safe-bottom));
+}
+
+.category {
+  margin-bottom: 20px;
+}
+
+.category-header {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-count {
+  background: var(--border);
+  color: var(--text);
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.subcategory {
+  font-size: 12px;
+  color: var(--text2);
+  margin: 10px 0 6px 4px;
+  font-weight: 500;
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.15s;
+  position: relative;
+  user-select: none;
+}
+
+.card:active { transform: scale(0.985); opacity: 0.9; }
+
+.card.selected {
+  background: color-mix(in srgb, var(--accent) 12%, var(--card));
+  outline: 1.5px solid var(--accent);
+}
+
+.card-check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  margin-top: 1px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.select-mode .card-check { display: flex; }
+
+.card.selected .card-check {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.card.selected .card-check::after {
+  content: "✓";
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+.card-meta {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.badge-note { background: color-mix(in srgb, #ff9500 18%, transparent); color: #ff9500; }
+.badge-master { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+.badge-price { background: color-mix(in srgb, var(--success) 15%, transparent); color: var(--success); }
+.badge-book { background: color-mix(in srgb, var(--danger) 15%, transparent); color: var(--danger); }
+
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--text2);
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.empty-state p { font-size: 15px; line-height: 1.5; }
+
+/* Bottom bars */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border-top: 0.5px solid var(--border);
+  padding: 12px 16px calc(12px + var(--safe-bottom));
+  z-index: 200;
+  display: none;
+  gap: 10px;
+  align-items: center;
+}
+
+.bottom-bar.visible { display: flex; }
+
+.bottom-bar .count {
+  font-size: 15px;
+  font-weight: 600;
+  flex: 1;
+}
+
+/* Action sheet */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 300;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--card);
+  border-radius: 16px 16px 0 0;
+  padding: 8px 0 calc(12px + var(--safe-bottom));
+  z-index: 310;
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.sheet.visible { transform: translateY(0); }
+
+.sheet-handle {
+  width: 36px;
+  height: 5px;
+  background: var(--border);
+  border-radius: 3px;
+  margin: 0 auto 12px;
+}
+
+.sheet-title {
+  font-size: 13px;
+  color: var(--text2);
+  text-align: center;
+  padding: 0 20px 10px;
+  font-weight: 500;
+}
+
+.sheet-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  font-size: 17px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  color: var(--text);
+}
+
+.sheet-item:active { background: var(--bg); }
+.sheet-item.danger { color: var(--danger); }
+.sheet-item.cancel { color: var(--accent); font-weight: 600; justify-content: center; margin-top: 4px; border-top: 0.5px solid var(--border); padding-top: 16px; }
+
+.sheet-icon {
+  width: 28px;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: calc(20px + var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(30,30,30,0.92);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 500;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Confirm dialog */
+.dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: var(--card);
+  border-radius: 14px;
+  width: calc(100% - 48px);
+  max-width: 320px;
+  z-index: 400;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.dialog.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.dialog-body {
+  padding: 22px 20px 16px;
+  text-align: center;
+}
+
+.dialog-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.dialog-text {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+.dialog-actions {
+  display: flex;
+  border-top: 0.5px solid var(--border);
+}
+
+.dialog-btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  background: none;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.dialog-btn:active { background: var(--bg); }
+.dialog-btn.danger { color: var(--danger); }
+.dialog-btn + .dialog-btn { border-left: 0.5px solid var(--border); }
+
+/* File input hidden */
+#fileInput { display: none; }
+
+/* Load screen */
+.load-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+}
+
+.app-icon {
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0,122,255,0.35));
+}
+
+.load-screen h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.load-screen p {
+  color: var(--text2);
+  margin-bottom: 28px;
+  font-size: 15px;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.homescreen-hint {
+  margin-top: 32px !important;
+  margin-bottom: 0 !important;
+  font-size: 13px !important;
+  color: var(--text2);
+  opacity: 0.85;
+  max-width: 260px;
+}
+
+.homescreen-hint b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.load-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 32px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+}
+
+.load-btn:active { opacity: 0.8; }
+
+.restore-hint {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text2);
+}
+
+.restore-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+  padding: 8px 16px;
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- Load screen -->
+  <div id="loadScreen" class="load-screen">
+    <div class="app-icon" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="72" height="72">
+        <rect width="64" height="64" rx="14" fill="#007AFF"/>
+        <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 27 L32 18 L48 27 L48 43 L32 52 L16 43 Z"/>
+          <path d="M32 18 L32 52"/>
+          <path d="M16 27 L48 27"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Склад</h1>
+    <p>Загрузите TXT-файл со списком товаров, чтобы начать работу</p>
+    <button class="load-btn" id="loadBtn">Загрузить TXT</button>
+    <div id="restoreBlock" style="display:none">
+      <p class="restore-hint">Найдена сохранённая версия</p>
+      <button class="restore-btn" id="restoreBtn">Восстановить</button>
+    </div>
+    <p class="homescreen-hint">Чтобы добавить на рабочий стол:<br>откройте через <b>Safari</b> → Поделиться → На экран «Домой»</p>
+  </div>
+
+  <!-- Main app (hidden initially) -->
+  <div id="mainApp" style="display:none; flex-direction:column; height:100%;">
+    <div class="header">
+      <div class="header-top">
+        <div class="header-title">Склад</div>
+        <div class="header-actions">
+          <button class="btn btn-ghost btn-sm" id="selectModeBtn">Выбрать</button>
+          <button class="btn btn-secondary btn-sm" id="exportBtn">Скачать</button>
+          <button class="btn btn-ghost btn-sm" id="newFileBtn" title="Новый файл">＋</button>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" class="search-input" id="searchInput" placeholder="Поиск по названию, цвету, памяти, SN..." autocomplete="off" enterkeyhint="search">
+        <button class="search-clear" id="searchClear">×</button>
+      </div>
+    </div>
+
+    <div class="stats" id="statsBar">
+      <span>Товаров: <strong id="totalCount">0</strong></span>
+      <span id="filterInfo"></span>
+    </div>
+
+    <div class="content" id="content"></div>
+
+    <!-- Multi-select bottom bar -->
+    <div class="bottom-bar" id="multiBar">
+      <span class="count" id="selectedCount">0 выбрано</span>
+      <button class="btn btn-primary btn-sm" id="multiActionsBtn">Действия</button>
+      <button class="btn btn-ghost btn-sm" id="cancelSelectBtn">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay + Action sheet -->
+<div class="overlay" id="overlay"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title" id="sheetTitle"></div>
+  <div id="sheetItems"></div>
+</div>
+
+<!-- Confirm dialog -->
+<div class="overlay" id="dialogOverlay"></div>
+<div class="dialog" id="dialog">
+  <div class="dialog-body">
+    <div class="dialog-title" id="dialogTitle">Удалить?</div>
+    <div class="dialog-text" id="dialogText"></div>
+  </div>
+  <div class="dialog-actions">
+    <button class="dialog-btn" id="dialogCancel">Отмена</button>
+    <button class="dialog-btn danger" id="dialogConfirm">Удалить</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<input type="file" id="fileInput" accept=".txt,text/plain">
+
+<script>
+(function() {
+  'use strict';
+
+  // ========== State ==========
+  let items = [];          // { id, line, category, subcategory, isProduct, text, serial }
+  let originalLines = [];  // original raw lines for export structure
+  let deletedIds = new Set();
+  let selectMode = false;
+  let selected = new Set();
+  let currentSheetItem = null;
+  let searchQuery = '';
+  let confirmCallback = null;
+
+  const STORAGE_KEY = 'sklad_manager_v1';
+
+  // ========== DOM ==========
+  const $ = id => document.getElementById(id);
+  const loadScreen = $('loadScreen');
+  const mainApp = $('mainApp');
+  const content = $('content');
+  const searchInput = $('searchInput');
+  const searchClear = $('searchClear');
+  const totalCount = $('totalCount');
+  const filterInfo = $('filterInfo');
+  const multiBar = $('multiBar');
+  const selectedCount = $('selectedCount');
+  const overlay = $('overlay');
+  const sheet = $('sheet');
+  const sheetTitle = $('sheetTitle');
+  const sheetItems = $('sheetItems');
+  const toastEl = $('toast');
+  const dialog = $('dialog');
+  const dialogOverlay = $('dialogOverlay');
+  const fileInput = $('fileInput');
+
+  // ========== Parser ==========
+  function isCategoryHeader(line) {
+    const t = line.trim();
+    // Pure dash lines are separators, not headers
+    if (/^[-–—\s]+$/.test(t)) return false;
+
+    // Extract potential name by stripping surrounding dashes
+    const nameOnly = t.replace(/^[-–—\s]+/, '').replace(/[-–—\s]+$/, '').trim();
+    if (!nameOnly || nameOnly.length < 2) return false;
+    if (!/[а-яА-Яa-zA-Z]/.test(nameOnly)) return false;
+
+    // Case 1: line itself starts or ends with dashes (e.g. "---- Category ----")
+    if ((/^[-–—]{2,}/.test(t) || /[-–—]{2,}$/.test(t)) && nameOnly.length < 50) {
+      return true;
+    }
+
+    // Case 2: short title-like lines that end with colon (most categories in the file)
+    // "Mini iPhone:", "Телевизор:", "PlayStation 5:", "MacBook Air:" etc.
+    if (nameOnly.length <= 35 && /:$/.test(nameOnly) && !/\(/.test(nameOnly) && !/,/.test(nameOnly)) {
+      return true;
+    }
+
+    // Case 3: short names without colon that look like section titles
+    if (nameOnly.length <= 28 && !/\d{4,}/.test(nameOnly) && !/\(/.test(nameOnly) &&
+        !/,/.test(nameOnly) && !/—/.test(nameOnly) && /^[А-ЯA-Z]/.test(nameOnly)) {
+      // Avoid product-like or subcategory-like names
+      if (/\b(GB|TB|mm|Pro|Max|Ultra|Air|Slim|eSIM|SIM)\b/i.test(nameOnly)) return false;
+      if (/^\d/.test(nameOnly)) return false;
+      return true;
+    }
+
+    return false;
+  }
+
+  function isSeparator(line) {
+    const t = line.trim();
+    return /^[-–—]{4,}$/.test(t) || t === '-' || t === '–' || t === '—';
+  }
+
+  function isSubcategory(line) {
+    const t = line.trim();
+    // Patterns like -256GB-  -eSIM-  -SIM+eSIM-  -42mm-  -128GB- etc.
+    if (/^[-–—]+\s*(eSIM|SIM\+eSIM|Wi-Fi|WiFi|256GB|512GB|1TB|128GB|2TB|\d+GB|\d+mm)\s*[-–—]*$/i.test(t)) return true;
+    if (/^[-–—][\w+/]+[-–—]?$/.test(t) && t.length < 20) return true;
+    // Also bare " -eSIM- " style or just "eSIM" under memory groups sometimes
+    if (/^[-–—]?(eSIM|SIM\+eSIM)[-–—]?$/i.test(t)) return true;
+    if (/^[-–—]?\d+(GB|TB|mm)[-–—]?$/i.test(t)) return true;
+    return false;
+  }
+
+  function extractSerial(text) {
+    // Try to find the most likely serial: long alphanumeric in parentheses near the end
+    // Patterns: (SERIAL) or — SERIAL or [notes]
+    const patterns = [
+      /\(([A-Z0-9][A-Z0-9\-_]{6,})\)/gi,           // (SERIAL)
+      /—\s*([A-Z0-9][A-Z0-9\-_]{8,})/gi,            // — SERIAL
+      /\(([A-Z0-9]{4,}(?:[A-Z0-9\-]{0,}[A-Z0-9])?)\)/gi
+    ];
+    let serials = [];
+    for (const p of patterns) {
+      let m;
+      while ((m = p.exec(text)) !== null) {
+        const s = m[1];
+        // Filter out obvious non-serials (prices, short codes, Russian words)
+        if (/^\d+[\s.,]?\d*$/.test(s)) continue; // prices
+        if (/^\d{1,3}$/.test(s)) continue;
+        if (/[а-яА-Я]/.test(s)) continue;
+        if (s.length >= 7) serials.push({ full: m[0], serial: s });
+      }
+    }
+    // Prefer the last one (usually the real SN)
+    return serials.length ? serials[serials.length - 1] : null;
+  }
+
+  function isProductLine(line) {
+    const t = line.trim();
+    if (!t || isSeparator(t) || isCategoryHeader(t) || isSubcategory(t)) return false;
+    // Has letters and is reasonably long
+    if (t.length < 4) return false;
+    if (!/[а-яА-Яa-zA-Z]/.test(t)) return false;
+    return true;
+  }
+
+  function parseTXT(text) {
+    const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+    originalLines = lines.slice();
+    items = [];
+    deletedIds = new Set();
+
+    let currentCategory = '';
+    let currentSub = '';
+    let idCounter = 0;
+
+    for (let i = 0; i < lines.length; i++) {
+      const raw = lines[i];
+      const trimmed = raw.trim();
+
+      // Detect category: line with dashes containing text, or previous/next are pure separators
+      if (isCategoryHeader(trimmed)) {
+        // Extract name: remove surrounding dashes
+        let name = trimmed.replace(/^[-–—\s]+/, '').replace(/[-–—\s]+$/, '').trim();
+        if (name) {
+          currentCategory = name;
+          currentSub = '';
+        }
+        items.push({
+          id: 'h' + (idCounter++),
+          lineIndex: i,
+          type: 'header',
+          category: currentCategory,
+          text: raw,
+          display: name
+        });
+        continue;
+      }
+
+      if (isSubcategory(trimmed)) {
+        currentSub = trimmed.replace(/^[-–—]+/, '').replace(/[-–—]+$/, '').trim();
+        items.push({
+          id: 's' + (idCounter++),
+          lineIndex: i,
+          type: 'sub',
+          category: currentCategory,
+          subcategory: currentSub,
+          text: raw,
+          display: currentSub
+        });
+        continue;
+      }
+
+      if (isProductLine(trimmed)) {
+        const serialInfo = extractSerial(trimmed);
+        items.push({
+          id: 'p' + (idCounter++),
+          lineIndex: i,
+          type: 'product',
+          category: currentCategory,
+          subcategory: currentSub,
+          text: raw,
+          display: trimmed,
+          serial: serialInfo ? serialInfo.serial : null,
+          serialMatch: serialInfo ? serialInfo.full : null
+        });
+        continue;
+      }
+
+      // Other lines (empty, pure separators, notes)
+      items.push({
+        id: 'o' + (idCounter++),
+        lineIndex: i,
+        type: 'other',
+        category: currentCategory,
+        subcategory: currentSub,
+        text: raw
+      });
+    }
+
+    return items;
+  }
+
+  // ========== Rendering ==========
+  function getVisibleProducts() {
+    return items.filter(it => it.type === 'product' && !deletedIds.has(it.id));
+  }
+
+  function matchesSearch(item, q) {
+    if (!q) return true;
+    const lower = q.toLowerCase();
+    const fields = [
+      item.display,
+      item.category,
+      item.subcategory,
+      item.serial || ''
+    ].join(' ').toLowerCase();
+    return fields.includes(lower);
+  }
+
+  function render() {
+    const products = getVisibleProducts();
+    const q = searchQuery.trim().toLowerCase();
+    const filtered = q ? products.filter(p => matchesSearch(p, q)) : products;
+
+    totalCount.textContent = products.length;
+    filterInfo.textContent = q ? `Найдено: ${filtered.length}` : '';
+
+    if (filtered.length === 0) {
+      content.innerHTML = `
+        <div class="empty-state">
+          <h3>${q ? 'Ничего не найдено' : 'Нет товаров'}</h3>
+          <p>${q ? 'Попробуйте другой запрос' : 'Загрузите TXT-файл или восстановите сохранённую версию'}</p>
+        </div>`;
+      return;
+    }
+
+    // Group by category, keep order
+    let html = '';
+    let lastCat = null;
+    let lastSub = null;
+    let catCount = 0;
+    let catProducts = [];
+
+    // Pre-group for counts
+    const catMap = new Map();
+    for (const p of filtered) {
+      if (!catMap.has(p.category)) catMap.set(p.category, []);
+      catMap.get(p.category).push(p);
+    }
+
+    for (const p of filtered) {
+      if (p.category !== lastCat) {
+        if (lastCat !== null) html += '</div>';
+        lastCat = p.category;
+        lastSub = null;
+        const cnt = catMap.get(p.category)?.length || 0;
+        html += `<div class="category">
+          <div class="category-header">${escapeHtml(p.category || 'Без категории')} <span class="category-count">${cnt}</span></div>`;
+      }
+
+      if (p.subcategory && p.subcategory !== lastSub) {
+        lastSub = p.subcategory;
+        html += `<div class="subcategory">${escapeHtml(p.subcategory)}</div>`;
+      }
+
+      const isSel = selected.has(p.id);
+      const badges = buildBadges(p);
+
+      html += `
+        <div class="card ${isSel ? 'selected' : ''}" data-id="${p.id}">
+          <div class="card-check"></div>
+          <div class="card-body">
+            <div class="card-title">${escapeHtml(p.display)}</div>
+            ${badges ? `<div class="card-meta">${badges}</div>` : ''}
+          </div>
+        </div>`;
+    }
+    if (lastCat !== null) html += '</div>';
+
+    content.innerHTML = html;
+    content.classList.toggle('select-mode', selectMode);
+
+    // Bind clicks
+    content.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const id = card.dataset.id;
+        if (selectMode) {
+          toggleSelect(id);
+        } else {
+          openItemSheet(id);
+        }
+      });
+    });
+  }
+
+  function buildBadges(p) {
+    const parts = [];
+    const t = p.display;
+    if (/бронь|БРОНЬ/i.test(t)) parts.push('<span class="badge badge-book">бронь</span>');
+    if (/👨‍🔧|мастер/i.test(t)) parts.push('<span class="badge badge-master">мастер</span>');
+    if (/\d[\s]?990|\d[\s]?к\b|цена/i.test(t)) parts.push('<span class="badge badge-price">цена</span>');
+    if (/надо проверить|проверить/i.test(t)) parts.push('<span class="badge badge-note">проверить</span>');
+    if (/потеряшка/i.test(t)) parts.push('<span class="badge badge-note">потеряшка</span>');
+    if (/актив|вскрыт/i.test(t)) parts.push('<span class="badge badge-note">актив</span>');
+    return parts.join('');
+  }
+
+  function escapeHtml(s) {
+    if (!s) return '';
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ========== Selection ==========
+  function setSelectMode(on) {
+    selectMode = on;
+    selected.clear();
+    multiBar.classList.toggle('visible', on);
+    $('selectModeBtn').textContent = on ? 'Готово' : 'Выбрать';
+    updateSelectedCount();
+    render();
+  }
+
+  function toggleSelect(id) {
+    if (selected.has(id)) selected.delete(id);
+    else selected.add(id);
+    updateSelectedCount();
+    // Update only the card
+    const card = content.querySelector(`.card[data-id="${id}"]`);
+    if (card) card.classList.toggle('selected', selected.has(id));
+  }
+
+  function updateSelectedCount() {
+    const n = selected.size;
+    selectedCount.textContent = n === 0 ? '0 выбрано' : n === 1 ? '1 выбран' : `${n} выбрано`;
+  }
+
+  // ========== Action sheets ==========
+  function openSheet(title, actions) {
+    sheetTitle.textContent = title;
+    sheetItems.innerHTML = actions.map(a => `
+      <button class="sheet-item ${a.danger ? 'danger' : ''} ${a.cancel ? 'cancel' : ''}" data-action="${a.action}">
+        ${a.icon ? `<span class="sheet-icon">${a.icon}</span>` : ''}
+        <span>${a.label}</span>
+      </button>`).join('');
+
+    sheetItems.querySelectorAll('.sheet-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const act = btn.dataset.action;
+        // Save item before closeSheet clears it
+        const itemForAction = currentSheetItem;
+        closeSheet();
+        if (act && act !== 'cancel') handleSheetAction(act, itemForAction);
+      });
+    });
+
+    overlay.classList.add('visible');
+    sheet.classList.add('visible');
+  }
+
+  function closeSheet() {
+    overlay.classList.remove('visible');
+    sheet.classList.remove('visible');
+    currentSheetItem = null;
+  }
+
+  function openItemSheet(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+    currentSheetItem = item;
+    openSheet(item.display.length > 60 ? item.display.slice(0, 57) + '…' : item.display, [
+      { action: 'copyWith', label: 'Скопировать с серийным номером', icon: '📋' },
+      { action: 'copyWithout', label: 'Скопировать без серийного номера', icon: '📄' },
+      { action: 'delete', label: 'Удалить товар', icon: '🗑️', danger: true },
+      { action: 'cancel', label: 'Отмена', cancel: true }
+    ]);
+  }
+
+  function openMultiSheet() {
+    if (selected.size === 0) {
+      showToast('Ничего не выбрано');
+      return;
+    }
+    openSheet(`Выбрано: ${selected.size}`, [
+      { action: 'multiCopyWith', label: 'Скопировать с серийными номерами', icon: '📋' },
+      { action: 'multiCopyWithout', label: 'Скопировать без серийных номеров', icon: '📄' },
+      { action: 'multiDelete', label: 'Удалить выбранные', icon: '🗑️', danger: true },
+      { action: 'cancel', label: 'Отмена', cancel: true }
+    ]);
+  }
+
+  function handleSheetAction(action, item) {
+    switch (action) {
+      case 'copyWith':
+        if (item) {
+          copyText(item.display);
+          showToast('Скопировано с SN');
+        }
+        break;
+      case 'copyWithout':
+        if (item) {
+          copyText(stripSerial(item));
+          showToast('Скопировано без SN');
+        }
+        break;
+      case 'delete':
+        if (item) confirmDelete([item.id]);
+        break;
+      case 'multiCopyWith': {
+        const texts = getSelectedInOrder().map(p => p.display);
+        copyText(texts.join('\n'));
+        showToast(`Скопировано ${texts.length} с SN`);
+        break;
+      }
+      case 'multiCopyWithout': {
+        const texts = getSelectedInOrder().map(p => stripSerial(p));
+        copyText(texts.join('\n'));
+        showToast(`Скопировано ${texts.length} без SN`);
+        break;
+      }
+      case 'multiDelete':
+        confirmDelete([...selected]);
+        break;
+    }
+  }
+
+  function getSelectedInOrder() {
+    return items.filter(i => i.type === 'product' && selected.has(i.id) && !deletedIds.has(i.id));
+  }
+
+  function stripSerial(item) {
+    let t = item.display;
+    if (item.serialMatch) {
+      // Remove the exact match of the serial part
+      t = t.replace(item.serialMatch, '').replace(/\s{2,}/g, ' ').replace(/\s*—\s*$/, '').replace(/\s+$/, '').trim();
+      // Clean leftover empty parentheses or trailing dashes
+      t = t.replace(/\(\s*\)/g, '').replace(/\s*—\s*$/, '').replace(/,\s*$/, '').trim();
+    } else if (item.serial) {
+      // Fallback: remove serial string
+      const re = new RegExp('[\\(\\—\\-\\s]*' + escapeRegExp(item.serial) + '[\\)\\s]*', 'gi');
+      t = t.replace(re, '').replace(/\s{2,}/g, ' ').trim();
+    }
+    return t || item.display;
+  }
+
+  function escapeRegExp(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // ========== Delete ==========
+  function confirmDelete(ids) {
+    const n = ids.length;
+    $('dialogTitle').textContent = n === 1 ? 'Удалить товар?' : `Удалить ${n} товаров?`;
+    $('dialogText').textContent = n === 1
+      ? 'Товар будет удалён из текущего списка. Это действие можно отменить только перезагрузкой файла.'
+      : 'Выбранные товары будут удалены из текущего списка.';
+    confirmCallback = () => {
+      ids.forEach(id => deletedIds.add(id));
+      selected.clear();
+      if (selectMode) setSelectMode(false);
+      saveState();
+      render();
+      showToast(n === 1 ? 'Товар удалён' : `Удалено: ${n}`);
+    };
+    dialogOverlay.classList.add('visible');
+    dialog.classList.add('visible');
+  }
+
+  function closeDialog() {
+    dialogOverlay.classList.remove('visible');
+    dialog.classList.remove('visible');
+    confirmCallback = null;
+  }
+
+  // ========== Copy ==========
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // Fallback for older Safari
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+    } catch (e) {
+      showToast('Не удалось скопировать');
+      console.error(e);
+    }
+  }
+
+  // ========== Export ==========
+  function exportTXT() {
+    // Rebuild file preserving original line order, skipping deleted products
+    const deletedLineIndexes = new Set();
+    items.forEach(it => {
+      if (it.type === 'product' && deletedIds.has(it.id)) {
+        deletedLineIndexes.add(it.lineIndex);
+      }
+    });
+
+    const resultLines = [];
+    for (let i = 0; i < originalLines.length; i++) {
+      if (deletedLineIndexes.has(i)) continue;
+      resultLines.push(originalLines[i]);
+    }
+
+    // Clean up excessive empty separators if needed (optional, keep structure mostly intact)
+    let out = resultLines.join('\n');
+    // Ensure trailing newline
+    if (!out.endsWith('\n')) out += '\n';
+
+    const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const now = new Date();
+    const stamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}_${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
+    a.download = `sklad_${stamp}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    showToast('Файл скачан');
+  }
+
+  // ========== Storage ==========
+  function saveState() {
+    try {
+      const data = {
+        originalText: originalLines.join('\n'),
+        deletedIds: [...deletedIds],
+        savedAt: Date.now()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.warn('Save failed', e);
+    }
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearState() {
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  function restoreFromStorage() {
+    const data = loadState();
+    if (!data || !data.originalText) return false;
+    parseTXT(data.originalText);
+    deletedIds = new Set(data.deletedIds || []);
+    showMain();
+    render();
+    showToast('Восстановлено');
+    return true;
+  }
+
+  // ========== UI helpers ==========
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('visible');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toastEl.classList.remove('visible'), 2200);
+  }
+
+  function showMain() {
+    loadScreen.style.display = 'none';
+    mainApp.style.display = 'flex';
+  }
+
+  function showLoad() {
+    mainApp.style.display = 'none';
+    loadScreen.style.display = 'flex';
+    const data = loadState();
+    if (data && data.originalText) {
+      $('restoreBlock').style.display = 'block';
+    } else {
+      $('restoreBlock').style.display = 'none';
+    }
+  }
+
+  // ========== File load ==========
+  function handleFile(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target.result;
+      parseTXT(text);
+      deletedIds = new Set();
+      selected.clear();
+      selectMode = false;
+      searchQuery = '';
+      searchInput.value = '';
+      searchClear.classList.remove('visible');
+      saveState();
+      showMain();
+      render();
+      showToast(`Загружено: ${getVisibleProducts().length} товаров`);
+    };
+    reader.onerror = () => showToast('Ошибка чтения файла');
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  // ========== Events ==========
+  $('loadBtn').addEventListener('click', () => fileInput.click());
+  $('newFileBtn').addEventListener('click', () => {
+    if (confirm('Загрузить новый файл? Текущие изменения (удаления) будут потеряны, если не скачать TXT.')) {
+      fileInput.click();
+    }
+  });
+  fileInput.addEventListener('change', (e) => {
+    const f = e.target.files[0];
+    if (f) handleFile(f);
+    fileInput.value = '';
+  });
+
+  $('restoreBtn').addEventListener('click', () => {
+    if (!restoreFromStorage()) showToast('Нет сохранённых данных');
+  });
+
+  $('selectModeBtn').addEventListener('click', () => {
+    setSelectMode(!selectMode);
+  });
+
+  $('cancelSelectBtn').addEventListener('click', () => setSelectMode(false));
+  $('multiActionsBtn').addEventListener('click', openMultiSheet);
+
+  $('exportBtn').addEventListener('click', exportTXT);
+
+  searchInput.addEventListener('input', () => {
+    searchQuery = searchInput.value;
+    searchClear.classList.toggle('visible', searchQuery.length > 0);
+    render();
+  });
+
+  searchClear.addEventListener('click', () => {
+    searchInput.value = '';
+    searchQuery = '';
+    searchClear.classList.remove('visible');
+    render();
+    searchInput.focus();
+  });
+
+  overlay.addEventListener('click', closeSheet);
+  dialogOverlay.addEventListener('click', closeDialog);
+  $('dialogCancel').addEventListener('click', closeDialog);
+  $('dialogConfirm').addEventListener('click', () => {
+    if (confirmCallback) confirmCallback();
+    closeDialog();
+  });
+
+  // Prevent zoom on double-tap etc.
+  document.addEventListener('gesturestart', e => e.preventDefault());
+
+  // Init
+  const saved = loadState();
+  if (saved && saved.originalText) {
+    $('restoreBlock').style.display = 'block';
+  }
+
+  // Pre-load the attached sample if available (for testing in this environment)
+  // In real use the user loads the file themselves.
+
+})();
+</script>
+</body>
+</html>
